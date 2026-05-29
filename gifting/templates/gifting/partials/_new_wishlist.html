@@ -1,0 +1,14 @@
+<h3>Create Wishlist</h3>
+
+<form
+  method="post"
+  hx-post="{% url 'gifting:wishlist_create' %}"
+  hx-target="#wishlist-section"
+  hx-push-url="{% url 'gifting:dashboard' %}"
+>
+  {% csrf_token %}
+
+  {{ form.as_p }}
+
+  <button type="submit">Create</button>
+</form>

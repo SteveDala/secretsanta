@@ -1,0 +1,13 @@
+  <!-- ✅ SIDEBAR (always visible) -->
+  <div id="wishlist-sidebar" style="width: 250px;" hx-swap-oob="true">
+    {% include "gifting/partials/_sidebar.html" %}
+  </div>
+
+  <!-- ✅ MAIN CONTENT AREA -->
+  <div id="wishlist-section" style="flex-grow: 1;">
+    {% if selected_partial %}
+      {% include selected_partial %}
+    {% else %}
+      <p>Select a wishlist</p>
+    {% endif %}
+  </div>
