@@ -1,7 +1,8 @@
 <button
   hx-get="{% url 'gifting:dashboard' %}"
   hx-target="#wishlist-section"
-  hx-push-url="true">
+  hx-push-url="true"
+>
   x Close Wishlist
 </button>
 
@@ -14,12 +15,13 @@
     <button
       hx-get="{% url 'gifting:wish_detail' object.id wish.id %}"
       hx-target="#wishlist-section"
-      hx-push-url="true">
+      hx-push-url="true"
+    >
       {{ wish.title }}
     </button>
-{% if wish.url %}
-  <a href="{{ wish.url }}" target="_blank">Product Link</a>
-{% endif %}
+    {% if wish.url %}
+    <a href="{{ wish.url }}" target="_blank">Product Link</a>
+    {% endif %}
   </li>
 
   {% empty %}
@@ -31,7 +33,7 @@
       hx-target="#wishlist-section"
       hx-push-url="true"
     >
-    Add Item
+      Add Item
     </button>
   </li>
 </ul>
@@ -42,7 +44,6 @@
   hx-confirm="Delete this wishlist and all its gifting?"
   hx-push-url="{% url 'gifting:dashboard' %}"
 >
-{% csrf_token %}
-<button type="submit">Delete Wishlist
-</button>
+  {% csrf_token %}
+  <button type="submit">Delete Wishlist</button>
 </form>

@@ -1,32 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Secret Santa</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js"
-          integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V"
-          crossorigin="anonymous"></script>
-</head>
+  <!-- Single Page Application Header -->
+  <head>
+    <meta charset="UTF-8">
+    <title>Secret Santa</title>
+  
+    <script
+      src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js"
+      integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V"
+      crossorigin="anonymous">
+    </script>
+  </head>
 
-<body>
-  <!-- ✅ NAVBAR -->
-  <nav style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #ccc;">
-    <h2>Secret Santa</h2>
-    {% if user.is_authenticated %}
-    <div style="display: flex; gap: 1rem; align-items: center;">
-      <span>{{ user.username }}</span>
-      <form method="post" action="{% url 'logout' %}">
-	{% csrf_token %}
-        <button type="submit">Logout</button>
-      </form>
-    </div>
-    {% endif %}
-  </nav>
+  <!-- Single Page Application Body -->
+  <body style="min-height: 100vh; display: flex; flex-direction: column;">
 
-  <!-- ✅ PAGE CONTENT -->
-  <main style="padding: 1rem;">
-    {% block content %}{% endblock %}
-  </main>
-</body>
+    <!-- Navbar -->
+    <nav
+      style="display: flex;
+             justify-content: space-between;
+             align-items: center;
+             padding: 1rem;
+             border-bottom: 1px solid #ccc;"
+    >
+
+      <!-- Left Side -->
+      <div style="display: flex; gap: 2rem; align-items: center;">
+        <a href="/gifting/" style="text-decoration: none; color: inherit;">
+          <h2>Secret Santa</h2>
+        </a>
+
+        {% if user.is_authenticated %}
+        <div style="display: flex; gap: 1rem">
+          <a href="#">Wishlists</a>
+          <a href="#">Events</a>
+        </div>
+      {% endif %}
+      </div>
+
+      <!-- Right Side -->
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <span>{{ user.get_full_name }}</span>
+
+        <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+          <button type="submit">Logout</button>
+        </form>
+      </div>
+    </nav>
+
+    <!-- Main Page Content -->
+    <main style="padding: 1rem;">
+      {% block content %}{% endblock %}
+    </main>
+
+    <!-- Single Page Application Footer -->
+    <footer
+      style="
+        width: 100%;
+        padding: 1rem 0;
+        text-align: center;
+        margin-top: auto;
+      "
+    >
+      <p style="margin: 0;">Made with ❤️ by Steven</p>
+    </footer>
+  </body>
+
 </html>

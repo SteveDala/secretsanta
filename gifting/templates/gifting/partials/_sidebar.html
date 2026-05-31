@@ -1,22 +1,22 @@
-    <h3>Wishlists</h3>
-    <ul>
-    {% for wishlist in user_wishlists %}
-        <li>
-          <button
-            hx-get="{% url 'gifting:wishlist_detail' wishlist.id %}"
-            hx-target="#wishlist-section"
-            hx-push-url="true">
-            {{ wishlist.name }}
-          </button>
-        </li>
-      {% empty %}
-      <li>No wishlists available.</li>
-      {% endfor %}
-    </ul>
-        <button
-          hx-get="{% url 'gifting:wishlist_create' %}"
-          hx-target="#wishlist-section"
-          hx-push-url="true"
-        >
-        + Add a Wishlist
-      </button>
+<h3>Wishlists</h3>
+<ul>
+  {% for wishlist in user_wishlists %}
+  <li>
+    <button
+      hx-get="{% url 'gifting:wishlist_detail' wishlist.id %}"
+      hx-target="#wishlist-section" hx-push-url="true"
+    >
+      {{ wishlist.name }}
+    </button>
+  </li>
+  {% empty %}
+  <li>No wishlists available.</li>
+  {% endfor %}
+</ul>
+<button
+  hx-get="{% url 'gifting:wishlist_create' %}"
+  hx-target="#wishlist-section"
+  hx-push-url="true"
+>
+  + Add a Wishlist
+</button>

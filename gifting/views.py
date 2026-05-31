@@ -73,6 +73,10 @@ class HTMXMixin:
             }
         )
 
+    @property
+    def is_htmx(self):
+        return self.request.headers.get("HX-Request")
+
 
 class DashboardView(LoginRequiredMixin, HTMXMixin, generic.ListView):
     template_name = "gifting/index.html"
@@ -102,7 +106,7 @@ class WishListCreateView(LoginRequiredMixin, HTMXMixin, generic.CreateView):
         form.instance.user = self.request.user
         self.object = form.save()
 
-        if self.request.headers.get("HX-Request"):
+        if self.is_htmx:
             return self.render_main_sections(
                 wishlist=self.object,
                 selected_partial="gifting/partials/_wishlist_detail.html"
@@ -128,7 +132,7 @@ class WishListDeleteView(LoginRequiredMixin, HTMXMixin, generic.DeleteView):
         self.object = self.get_object()
         self.object.delete()
 
-        if request.headers.get("HX-Request"):
+        if self.is_htmx:
             return self.render_main_sections(
                 selected_partial=None,
             )
@@ -158,7 +162,7 @@ class WishCreateView(LoginRequiredMixin, HTMXMixin, generic.CreateView):
         form.instance.wishlist = wishlist
         self.object = form.save()
 
-        if self.request.headers.get("HX-Request"):
+        if self.is_htmx:
             return self.render_main_sections(
                 wishlist=wishlist,
                 selected_partial="gifting/partials/_wishlist_detail.html"
@@ -177,13 +181,13 @@ class WishUpdateView(LoginRequiredMixin, HTMXMixin, generic.UpdateView):
     def form_valid(self, form):
         self.object = form.save()
 
-        if self.request.headers.get("HX-Request"):
+        if self.is_htmx:
             return self.render_main_sections(
                 wishlist=self.object.wishlist,
                 selected_partial="gifting/partials/_wishlist_detail.html"
             )
 
-        return redirect("gifting:detail", pk=self.object.wishist.id)
+        return redirect("gifting:detail", pk=self.object.wishlist.id)
 
 
 class WishDeleteView(LoginRequiredMixin, HTMXMixin, generic.DeleteView):
@@ -198,7 +202,7 @@ class WishDeleteView(LoginRequiredMixin, HTMXMixin, generic.DeleteView):
 
         self.object.delete()
 
-        if request.headers.get("HX-Request"):
+        if self.is_htmx:
             return self.render_main_sections(
                 wishlist=wishlist,
                 selected_partial="gifting/partials/_wishlist_detail.html"
