@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class DashboardView(LoginRequiredMixin, generic.TemplateView):
-    template_name = "gifting/dashboard.html"
+    template_name = "gifting/partials/wishlists/_dashboard.html"
 
     sidebar_template = "gifting/partials/home/_sidebar.html"
     content_template = "gifting/partials/home/_news.html"
