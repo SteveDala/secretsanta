@@ -1,7 +1,8 @@
 <button
-  hx-get="{% url 'gifting:dashboard' %}"
-  hx-target="#wishlist-section"
-  hx-push-url="true"
+  hx-get="{% url 'gifting:wishlist_empty' %}"
+  hx-target="#dash-content"
+  hx-swap="innerHTML"
+  hx-push-url="{% url 'gifting:wishlist_list' %}"
 >
   x Close Wishlist
 </button>
@@ -14,8 +15,9 @@
   <li>
     <button
       hx-get="{% url 'gifting:wish_detail' object.id wish.id %}"
-      hx-target="#wishlist-section"
+      hx-target="#dash-content"
       hx-push-url="true"
+      hx-swap="innerHTML"
     >
       {{ wish.title }}
     </button>
@@ -30,7 +32,7 @@
   <li>
     <button
       hx-get="{% url 'gifting:wish_create' object.id %}"
-      hx-target="#wishlist-section"
+      hx-target="#dash-content"
       hx-push-url="true"
     >
       Add Item
@@ -40,7 +42,7 @@
 
 <form
   hx-post="{% url 'gifting:wishlist_delete' object.id %}"
-  hx-target="#wishlist-section"
+  hx-target="#dash-content"
   hx-confirm="Delete this wishlist and all its gifting?"
   hx-push-url="{% url 'gifting:dashboard' %}"
 >

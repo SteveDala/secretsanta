@@ -1,2 +1,9 @@
 # Database
 db.sqlite3
+
+# MacOS
+.DS_Store
+
+# Caching
+__pycache__/
+*.py[cod]

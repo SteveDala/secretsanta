@@ -4,9 +4,7 @@
   <li>
     <button
       hx-get="{% url 'gifting:wishlist_detail' wishlist.id %}"
-      hx-target="#dash-content"
-      hx-push-url="true"
-      hx-swap="innerHTML"
+      hx-target="#dash-content" hx-push-url="true"
     >
       {{ wishlist.name }}
     </button>
