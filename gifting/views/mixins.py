@@ -29,4 +29,4 @@ class WishDashContextMixin:
         }
 
     def render_dashboard(self, context):
-        return render(self.request, "gifting/dashboard.html", context)
+        return render(self.request, "gifting/partials/wishlists/_dashboard.html", context)
