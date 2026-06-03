@@ -1,0 +1,15 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 250px 1fr;
+    }
+}

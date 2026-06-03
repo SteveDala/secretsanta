@@ -1,4 +1,7 @@
-from .dashboard import DashboardView
+from .dashboards import (
+    DashboardView,
+    EventsDash
+)
 from .wishlists import (
     UserWishLists,
     WishListCreateView,

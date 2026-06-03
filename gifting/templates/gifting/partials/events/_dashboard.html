@@ -1,0 +1,30 @@
+{% extends "gifting/base.html" %}
+
+{% block content %}
+
+<div
+    style="
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            'sidebar top'
+            'sidebar bottom';
+    "
+>
+
+    <div style="grid-area: sidebar;">
+        Sidebar
+    </div>
+
+    <div style="grid-area: top;">
+        Top Right
+    </div>
+
+    <div style="grid-area: bottom;">
+        Bottom Right
+    </div>
+
+</div>
+
+{% endblock %}
