@@ -13,7 +13,7 @@ urlpatterns = [
          name='wishlist_create'),
     # eg  wishlists/empty/
     path('wishlists/empty/', views.WishListEmptyView.as_view(),
-        name='wishlist_empty'),
+         name='wishlist_empty'),
     # eg  wishlists/1/
     path('wishlists/<int:pk>/', views.WishListDetailView.as_view(),
          name='wishlist_detail'),
@@ -30,7 +30,7 @@ urlpatterns = [
     path('wishlists/<int:wishlist_id>/wishes/<int:pk>/delete/',
          views.WishDeleteView.as_view(), name='wish_delete'),
     # eg  events/
-    #    path('events/', views.Events.as_view(), name='event_list'),
+    path('events/', views.EventsDash.as_view(), name='event_dash'),
     # eg  events/1/
     #    path('events/<int:event_id>/',
     #         views.EventDetail.as_view(), name='event_detail')

@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Secret Santa</title>
 
+    <link rel="stylesheet" href="{% static 'gifting/styles.css' %}">
     <script
       src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js"
       integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V"
@@ -36,7 +37,10 @@
           >
             Wishlists
           </a>
-          <a href="#">Events</a>
+          <a href="{% url 'gifting:event_dash' %}"
+          >
+            Events
+          </a>
         </div>
       </div>
 

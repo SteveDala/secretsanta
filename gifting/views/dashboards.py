@@ -16,3 +16,7 @@ class DashboardView(LoginRequiredMixin, generic.TemplateView):
     #     context["user_wishlists"] = self.request.user.wishlists.all()
 
     #     return context
+
+
+class EventsDash(LoginRequiredMixin, generic.TemplateView):
+    template_name = "gifting/partials/events/_dashboard.html"
