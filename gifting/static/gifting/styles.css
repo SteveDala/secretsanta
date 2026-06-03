@@ -6,10 +6,20 @@
 .dashboard-grid {
     display: grid;
     gap: 2rem;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "sidebar top"
+        "sidebar bottom";
 }
 
-@media (min-width: 768px) {
+/* mobile stacking */
+@media (max-width: 768px) {
     .dashboard-grid {
-        grid-template-columns: 250px 1fr;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "sidebar"
+            "top"
+            "bottom";
     }
 }
