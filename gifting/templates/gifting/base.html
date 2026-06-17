@@ -49,6 +49,9 @@
 
       <!-- Right Side -->
       <div style="display: flex; gap: 1rem; align-items: center;">
+
+        {% include "gifting/partials/notifications/_nav.html" %}
+
         <span>{{ user.username }}</span>
 
         <form method="post" action="{% url 'logout' %}">

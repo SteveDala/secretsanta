@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.utils import timezone
 
 
 class WishList(models.Model):
@@ -91,3 +93,58 @@ class EventParticipant(models.Model):
                 name="unique_wishlist_per_event"
             )
         ]
+
+
+class Notification(models.Model):
+    class NotificationType(models.TextChoices):
+        WISH_CREATED = "wish_created", "Wish created"
+        WISH_UPDATED = "wish_updated", "Wish updated"
+        WISH_DELETED = "wish_deleted", "Wish deleted"
+
+    recipient = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="notifications",
+    )
+
+    actor = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="sent_notifications",
+    )
+
+    notification_type = models.CharField(
+        max_length=50,
+        choices=NotificationType.choices,
+    )
+
+    target_content_type = models.ForeignKey(
+        "contenttypes.ContentType",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+    target_object_id = models.PositiveIntegerField(null=True, blank=True)
+    target = GenericForeignKey("target_content_type", "target_object_id")
+
+    title = models.CharField(max_length=255)
+    message = models.TextField(blank=True)
+
+    url = models.URLField(blank=True)
+
+    read_at = models.DateTimeField(null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        indexes = [
+            models.Index(fields=["recipient", "read_at"]),
+        ]
+
+    def mark_read(self):
+        if not self.read_at:
+            self.read_at = timezone.now()
+            self.save(update_fields=["read_at"])

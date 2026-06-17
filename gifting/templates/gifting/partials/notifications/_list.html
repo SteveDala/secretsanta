@@ -1,0 +1,9 @@
+<div id="notifications">
+  {% for n in notification_list %}
+    <div class="{% if not n.read_at %}unread{% endif %}">
+      <a href="{{ n.url }}}">
+        {{ n.message }}
+      </a>
+    </div>
+  {% endfor %}
+</div>

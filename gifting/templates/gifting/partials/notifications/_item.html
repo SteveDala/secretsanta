@@ -1,0 +1,11 @@
+<div id="notif-{{ n.id }}">
+  <a href="{{ n.url }}">{{ n.message }}</a>
+
+  <button
+    hx-post="{% url 'gifting:notify_read' n.id %}"
+    hx-target="#notif-{{ n.id }}"
+    hx-swap="outerHTML"
+  >
+    mark read
+  </button>
+</div>

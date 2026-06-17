@@ -1,0 +1,18 @@
+<div style="display: flex; gap: 1rem; align-items: center;">
+
+    <!-- Notification bell / badge -->
+    <a href="{% url 'gifting:notify_list' %}" style="position: relative; text-decoration: none;">
+
+        Inbox
+
+        <span
+            id="notif-badge"
+            hx-get="{% url 'gifting:notify_unread_count' %}"
+            hx-trigger="load, every 5s"
+            hx-swap="innerHTML"
+        >
+        </span>
+
+    </a>
+
+</div>

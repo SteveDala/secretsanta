@@ -18,3 +18,9 @@ from .events import (
     EventsList,
     EventDetail
 )
+
+from .notifications import (
+    NotificationListView,
+    NotificationReadView,
+    unread_count
+)

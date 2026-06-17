@@ -33,5 +33,16 @@ urlpatterns = [
     path('events/', views.EventsList.as_view(), name='event_dash'),
     # eg  events/1/
     path('events/<int:pk>/',
-         views.EventDetail.as_view(), name='event_detail')
+         views.EventDetail.as_view(), name='event_detail'),
+    # eg  notifications/
+    path('notifications/', views.NotificationListView.as_view(),
+         name='notify_list'),
+    # eg  notifications/unread-count/
+    path('notifications/unread-count/',
+         views.unread_count, name='notify_unread_count'),
+    # eg  notifications/4/read/
+    path('notifications/<int:pk>/read/',
+         views.NotificationReadView.as_view(), name='notify_read'),
+    # eg  notifications/read-all
+    # path('notifications/read-all', views.mark_all_read, name='read_all')
 ]
