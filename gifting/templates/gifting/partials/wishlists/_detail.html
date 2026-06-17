@@ -22,22 +22,21 @@
       {{ wish.title }}
     </button>
     {% if wish.url %}
-    <a href="{{ wish.url }}" target="_blank">Product Link</a>
+    <a href="{{ wish.url }}" target="_blank" cls="btn">Product Link</a>
     {% endif %}
   </li>
 
   {% empty %}
-  <li>No gifting yet.</li>
+  <li>No items yet.</li>
   {% endfor %}
-  <li>
+</ul>
     <button
       hx-get="{% url 'gifting:wish_create' object.id %}"
       hx-target="#dash-content"
       hx-push-url="true"
     >
-      Add Item
+      + Add an Item
     </button>
-  </li>
 </ul>
 
 <form
