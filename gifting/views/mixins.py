@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from ..models import Event
 
 
 class HTMXMixin:
@@ -30,3 +31,25 @@ class WishDashContextMixin:
 
     def render_dashboard(self, context):
         return render(self.request, "gifting/partials/wishlists/_dashboard.html", context)
+
+
+class EventDashContextMixin:
+    sidebar_template = None
+    main_panel_template = None
+    secondary_panel_template = None
+
+    def get_eventsdash_context(self, **kwargs):
+        return {
+            "user_events": (
+                Event.objects
+                .filter(participants__user=self.request.user)
+                .distinct()
+            ),
+            "sidebar_template": self.sidebar_template,
+            "main_panel_template": self.main_panel_template,
+            "secondary_panel_template": self.secondary_panel_template,
+            ** kwargs,
+        }
+
+    def render_eventsdash(self, context):
+        return render(self.request, "gifting/partials/events/_dashboard.html", context)

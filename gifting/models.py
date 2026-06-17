@@ -61,7 +61,9 @@ class EventParticipant(models.Model):
 
     wishlist = models.ForeignKey(
         WishList,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
         related_name="event_associations"
     )
 
@@ -72,10 +74,11 @@ class EventParticipant(models.Model):
     )
 
     def clean(self):
-        if self.wishlist.user != self.user:
-            raise ValidationError(
-                "Participant must use their own wishlist."
-            )
+        if self.wishlist is not None:
+            if self.wishlist.user != self.user:
+                raise ValidationError(
+                    "Participant must use their own wishlist."
+                )
 
     class Meta:
         constraints = [

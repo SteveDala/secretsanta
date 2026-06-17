@@ -7,7 +7,7 @@
     display: grid;
     gap: 2rem;
 
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(200px, 300px) 1fr;
     grid-template-areas:
         "sidebar top"
         "sidebar bottom";

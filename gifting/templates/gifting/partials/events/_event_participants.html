@@ -1,0 +1,6 @@
+<p>The following users are participating in this event:
+<ul>
+{% for participant in event.participants.all %}
+  <li>{{ participant.user.username }}</li>
+{% endfor %}
+</ul>

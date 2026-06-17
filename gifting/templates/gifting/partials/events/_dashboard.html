@@ -4,17 +4,17 @@
 
 <div class="dashboard-grid">
 
-    <div style="grid-area: sidebar;">
-        Sidebar
-    </div>
+  <div id="sidebar" style="grid-area: sidebar;">
+    {% include sidebar_template %}
+  </div>
 
-    <div style="grid-area: top;">
-        Top Right
-    </div>
+  <div id="main-panel" style="grid-area: top;">
+    {% include main_panel_template %}
+  </div>
 
-    <div style="grid-area: bottom;">
-        Bottom Right
-    </div>
+  <div id="secondary-panel" hx-swap-oob="true" style="grid-area: bottom;">
+    {% include secondary_panel_template %}
+  </div>
 
 </div>
 

@@ -30,8 +30,8 @@ urlpatterns = [
     path('wishlists/<int:wishlist_id>/wishes/<int:pk>/delete/',
          views.WishDeleteView.as_view(), name='wish_delete'),
     # eg  events/
-    path('events/', views.EventsDash.as_view(), name='event_dash'),
+    path('events/', views.EventsList.as_view(), name='event_dash'),
     # eg  events/1/
-    #    path('events/<int:event_id>/',
-    #         views.EventDetail.as_view(), name='event_detail')
+    path('events/<int:pk>/',
+         views.EventDetail.as_view(), name='event_detail')
 ]

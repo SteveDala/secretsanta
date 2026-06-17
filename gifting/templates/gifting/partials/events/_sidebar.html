@@ -1,0 +1,16 @@
+<h3>Events</h3>
+<ul>
+  {% for event in user_events %}
+    <li>
+      <button
+        hx-get="{% url 'gifting:event_detail' event.id %}"
+        hx-target="#main-panel"
+        hx-push-url="true"
+      >
+        {{ event.name }}
+      </button>
+    </li>
+  {% empty %}
+    <li>No Events Found</li>
+  {% endfor %}
+</ul>

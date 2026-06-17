@@ -14,3 +14,7 @@ from .wishes import (
     WishUpdateView,
     WishDeleteView,
 )
+from .events import (
+    EventsList,
+    EventDetail
+)
