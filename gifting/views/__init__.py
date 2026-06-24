@@ -16,5 +16,7 @@ from .wishes import (
 )
 from .events import (
     EventsList,
-    EventDetail
+    EventDetail,
+    EventEmpty,
+    EventParticipantSetWishList
 )

@@ -33,5 +33,12 @@ urlpatterns = [
     path('events/', views.EventsList.as_view(), name='event_dash'),
     # eg  events/1/
     path('events/<int:pk>/',
-         views.EventDetail.as_view(), name='event_detail')
+         views.EventDetail.as_view(), name='event_detail'),
+    # eg  events/empty/
+    path('events/empty/', views.EventEmpty.as_view(), name='event_empty'),
+    # eg  events/1/choose-wishlist
+    path('events/<int:pk>/choose-wishlist/',
+         views.EventParticipantSetWishList.as_view(),
+         name='event_choose_wishlist'
+         )
 ]

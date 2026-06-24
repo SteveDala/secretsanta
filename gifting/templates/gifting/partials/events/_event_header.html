@@ -1,4 +1,54 @@
+<button
+  hx-get="{% url 'gifting:event_empty' %}"
+  hx-target="#main-panel"
+  hx-swap="innerHTML"
+  hx-push-url="{% url 'gifting:event_dash' %}"
+>
+  x Close Event
+</button>
 <h1>{{ event.name }}</h1>
 <p>{{ event.date }}</p>
-<p>You have picked `participant.name`.</a>
-<p><a>See their wishlist</a></p>
+<p>
+  You have picked `participant.name`.
+  <a>See their wishlist</a>
+</p>
+
+{% if participant.wishlist %}
+<p>
+  You are using this wishlist:
+  <a href="{% url 'gifting:wishlist_detail' participant.wishlist.id %}"><strong>{{ participant.wishlist.name }}</strong></a>
+</p>
+{% else %}
+<p>You have not selected a wishlist for this event.</p>
+{% endif %}
+<form
+  hx-post="{% url 'gifting:event_choose_wishlist' object.pk %}"
+  hx-target="#main-panel"
+>
+  {% csrf_token %}
+
+    <select name="wishlist_id">
+    {% for wishlist in available_wishlists %}
+      <option value="{{ wishlist.id }}"
+      {% if wishlist.id == participant.wishlist.id %}
+      selected="selected"
+      {% endif %}
+      >
+        {{ wishlist.name }}
+      </option>
+    {% endfor %}
+      <option value="null"
+      {% if not participant.wishlist %}
+       selected="selected"
+      {% endif %}
+      >- No wishlist -</option>
+  </select>
+
+  <button type="submit">
+    {% if participant.wishlist %}
+      Change wishlist
+    {% else %}
+      Select wishlist
+    {% endif %}
+  </button>
+</form>
