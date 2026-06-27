@@ -36,6 +36,15 @@ class Wish(models.Model):
 
 
 class Event(models.Model):
+    class EventType(models.TextChoices):
+        SECRET_SANTA = "secret_santa"
+        BIRTHDAY = "birthday"
+        GENERAL = "general"
+
+    event_type = models.CharField(
+        max_length=20,
+        choices=EventType.choices,
+    )
     name = models.CharField(max_length=255)
     admin = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -91,3 +100,30 @@ class EventParticipant(models.Model):
                 name="unique_wishlist_per_event"
             )
         ]
+
+
+class Matchup(models.Model):
+    giver = models.OneToOneField(
+        EventParticipant,
+        related_name="assignment",
+        on_delete=models.CASCADE,
+    )
+
+    receiver = models.ForeignKey(
+        EventParticipant,
+        related_name="giver",
+        on_delete=models.CASCADE,
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def clean(self):
+        if self.giver.event != self.receiver.event:
+            raise ValidationError(
+                "Matchup participants must belong to the same event."
+            )
+
+        if self.giver == self.receiver:
+            raise ValidationError(
+                "Participants cannot match with themselves."
+            )
