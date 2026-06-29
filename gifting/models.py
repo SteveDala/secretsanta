@@ -82,6 +82,9 @@ class EventParticipant(models.Model):
         related_name="participants"
     )
 
+    def __str__(self):
+        return f"{self.user} in {self.event}"
+
     def clean(self):
         if self.wishlist is not None:
             if self.wishlist.user != self.user:
@@ -116,6 +119,12 @@ class Matchup(models.Model):
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return (
+            f"{self.giver.user} buys for {self.receiver.user} " +
+            f"for {self.giver.event.name}."
+        )
 
     def clean(self):
         if self.giver.event != self.receiver.event:
